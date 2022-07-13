@@ -1,0 +1,66 @@
+﻿ {
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/orders",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/orders",
+      "UpstreamHttpMethod": [ "Get" ],
+      "Key": "Orders"
+    }
+    //{
+    //  "DownstreamPathTemplate": "/api/products",
+    //  "DownstreamScheme": "http",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7002
+    //    }
+    //  ],
+    //  "UpstreamPathTemplate": "/api/products",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "Key": "Products"
+    //}
+  ],
+  //请求聚合, 当访问http://localhost:5000/api/aggregates， 会同时返回订单数据和产品数据 不支持Post
+  "Aggregates": [
+    {
+      "RouteKeys": [
+        "Orders",
+        "Products"
+      ],
+      "UpstreamPathTemplate": "/api/aggregates",
+      "UpstreamHttpMethod": [ "Get","Post" ]
+    }
+  ],
+  //"GlobalConfiguration": {
+  //  "BaseUrl": "http://localhost:7000"
+  //}
+}
+//{
+//  "Routes": [
+//    {
+//      "DownstreamPathTemplate": "/{url}",
+//      "DownstreamScheme": "http",
+//      "DownstreamHostAndPorts": [
+//        {
+//          "Host": "localhost",
+//          "Port": 7002
+//        }
+//      ],
+//      "UpstreamPathTemplate": "/{url}",
+//      "UpstreamHttpMethod": [ "Get" ]
+
+//    }
+
+//  ],
+//  "GlobalConfiguration": {
+//    "BaseUrl": "http://localhost:7000"
+//  }
+//}
+//16.0 使用Routes 而不是ReRoutes
