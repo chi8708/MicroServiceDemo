@@ -7,6 +7,10 @@
         {
           "Host": "localhost",
           "Port": 7001
+        },
+        {
+          "Host": "localhost",
+          "Port": 7002
         }
       ],
       "UpstreamPathTemplate": "/api/orders",
@@ -19,6 +23,13 @@
       //  "PeriodTimespan": 60,
       //  "Limit": 1
       //}
+      "FileCacheOptions": {//缓存
+        "TtlSeconds": 60,//60秒从用户停止交互后开始算秒数，是相对时间 不是绝对时间
+        "Region": "orders"
+      },
+      "LoadBalancerOptions": {//负载均衡
+        "Type": "RoundRobin"
+      }
     },
     {
       "DownstreamPathTemplate": "/api/orders/{id}",
@@ -36,8 +47,27 @@
         "DurationOfBreak": 5000,
         "TimeoutValue": 2000
       }
+    },
+    {
+      "DownstreamPathTemplate": "/api/shoppingCarts",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "DownstreamHeaderTransform": {
+        "devops": "rdc"//response 
+      },
+      "UpstreamPathTemplate": "/api/shoppingCarts",
+      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamHeaderTransform": {//request 替换
+        "lakin": "rdc",
+        "CI": "msbuild, jenkins",
+        "Location": "http://localhost:7001, {BaseUrl}"
+      }
     }
-
     //{
     //  "DownstreamPathTemplate": "/api/products",
     //  "DownstreamScheme": "http",

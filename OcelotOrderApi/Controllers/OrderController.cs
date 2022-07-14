@@ -28,5 +28,21 @@ namespace OcelotOrderApi.Controllers
         }
 
 
+        [Route("api/shoppingCarts")]
+        [HttpGet]
+        public IEnumerable<string> ShoppingCarts()
+        {
+            Console.WriteLine($"开始打印header信息");
+            List<string> headers = new List<string>();
+            foreach (var item in this.Request.Headers)
+            {
+                headers.Add($"{item.Key}:{item.Value}");
+                Console.WriteLine($"{item.Key} - {item.Value}");
+            }
+            Console.WriteLine($"打印header信息完成");
+
+            return headers;
+        }
+
     }
 }

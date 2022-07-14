@@ -68,7 +68,18 @@ namespace OcelotGateway
             app.UseCors("AllowAll");
             app.UseAuthorization();
 
-            app.UseOcelot().Wait();
+            //注入中间件
+            var configuration = new OcelotPipelineConfiguration
+            {
+                PreErrorResponderMiddleware = async (ctx, next) =>
+                {
+                    var path= ctx.Request.Path;//请求前拦截中间件:写日志
+                    await next.Invoke();
+                }
+            };
+            app.UseOcelot(configuration).Wait();
+
+           // app.UseOcelot().Wait();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

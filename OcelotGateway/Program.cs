@@ -11,6 +11,7 @@ using Ocelot.Configuration;
 using Ocelot.DependencyInjection;
 using Microsoft.AspNetCore;
 using Ocelot.Provider.Polly;
+using Ocelot.Cache.CacheManager;
 
 namespace OcelotGateway
 {
@@ -34,9 +35,13 @@ namespace OcelotGateway
                   })
                 .ConfigureServices(s =>
                 {
+
                     s.AddOcelot()
-                     .AddPolly();//ÈÛ¶Ï
-                    
+                     .AddPolly()//ÈÛ¶Ï
+                     .AddCacheManager(x =>//»º´æ
+                    {
+                        x.WithDictionaryHandle();
+                    });
                 })
                 .ConfigureLogging((hostingContext, logging) =>
                 {
