@@ -16,6 +16,8 @@
 
   <ItemGroup>
     <PackageReference Include="Ocelot" Version="16.0.0" />
+    <PackageReference Include="Ocelot.Provider.Consul" Version="16.0.0" />
+    <PackageReference Include="Ocelot.Provider.Polly" Version="16.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 

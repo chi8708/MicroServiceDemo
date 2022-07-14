@@ -11,8 +11,33 @@
       ],
       "UpstreamPathTemplate": "/api/orders",
       "UpstreamHttpMethod": [ "Get" ],
-      "Key": "Orders"
+      "Key": "Orders",
+      //"RateLimitOptions": {//限流
+      //  "ClientWhitelist": [],
+      //  "EnableRateLimiting": true,
+      //  "Period": "1m",
+      //  "PeriodTimespan": 60,
+      //  "Limit": 1
+      //}
+    },
+    {
+      "DownstreamPathTemplate": "/api/orders/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/orders/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "QoSOptions": { //熔断
+        "ExceptionsAllowedBeforeBreaking": 2,
+        "DurationOfBreak": 5000,
+        "TimeoutValue": 2000
+      }
     }
+
     //{
     //  "DownstreamPathTemplate": "/api/products",
     //  "DownstreamScheme": "http",

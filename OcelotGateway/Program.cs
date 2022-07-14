@@ -10,6 +10,7 @@ using Ocelot;
 using Ocelot.Configuration;
 using Ocelot.DependencyInjection;
 using Microsoft.AspNetCore;
+using Ocelot.Provider.Polly;
 
 namespace OcelotGateway
 {
@@ -33,7 +34,9 @@ namespace OcelotGateway
                   })
                 .ConfigureServices(s =>
                 {
-                    s.AddOcelot();
+                    s.AddOcelot()
+                     .AddPolly();//ÈÛ¶Ï
+                    
                 })
                 .ConfigureLogging((hostingContext, logging) =>
                 {

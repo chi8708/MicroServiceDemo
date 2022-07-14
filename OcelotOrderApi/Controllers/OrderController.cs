@@ -17,5 +17,16 @@ namespace OcelotOrderApi.Controllers
         {
             return new string[] { "订单1", "订单2" };
         }
+
+        // GET: api/Product
+        [Route("api/orders/{id}")]
+        [HttpGet]
+        public dynamic Get(int id)
+        {
+            //Task.Delay(3000).Wait();
+            return new { info="订单1" };
+        }
+
+
     }
 }
