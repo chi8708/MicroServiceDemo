@@ -12,6 +12,7 @@ using Ocelot.DependencyInjection;
 using Microsoft.AspNetCore;
 using Ocelot.Provider.Polly;
 using Ocelot.Cache.CacheManager;
+using Ocelot.Provider.Consul;
 
 namespace OcelotGateway
 {
@@ -37,6 +38,7 @@ namespace OcelotGateway
                 {
 
                     s.AddOcelot()
+                     .AddConsul()
                      .AddPolly()//ÈÛ¶Ï
                      .AddCacheManager(x =>//»º´æ
                     {

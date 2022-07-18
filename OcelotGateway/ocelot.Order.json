@@ -3,16 +3,17 @@
     {
       "DownstreamPathTemplate": "/api/orders",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7001
-        },
-        {
-          "Host": "localhost",
-          "Port": 7002
-        }
-      ],
+      //"DownstreamHostAndPorts": [
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 7001
+      //  },
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 7002
+      //  }
+      //],
+      "ServiceName": "service",//通过consul服务发现
       "UpstreamPathTemplate": "/api/orders",
       "UpstreamHttpMethod": [ "Get" ],
       "Key": "Orders",
@@ -23,11 +24,11 @@
       //  "PeriodTimespan": 60,
       //  "Limit": 1
       //}
-      "FileCacheOptions": {//缓存
-        "TtlSeconds": 60,//60秒从用户停止交互后开始算秒数，是相对时间 不是绝对时间
+      "FileCacheOptions": { //缓存
+        "TtlSeconds": 60, //60秒从用户停止交互后开始算秒数，是相对时间 不是绝对时间
         "Region": "orders"
       },
-      "LoadBalancerOptions": {//负载均衡
+      "LoadBalancerOptions": { //负载均衡
         "Type": "RoundRobin"
       }
     },
@@ -93,9 +94,14 @@
       "UpstreamHttpMethod": [ "Get","Post" ]
     }
   ],
-  //"GlobalConfiguration": {
-  //  "BaseUrl": "http://localhost:7000"
-  //}
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Scheme": "http",
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    }
+  }
 }
 //{
 //  "Routes": [
