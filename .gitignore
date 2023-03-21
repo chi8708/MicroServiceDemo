@@ -7,3 +7,7 @@
 /.vs
 /ConsulDemo/bin
 /ConsulDemo/obj
+/ClientDemo/bin
+/ClientDemo/obj
+/GrpcService1/bin
+/GrpcService1/obj
